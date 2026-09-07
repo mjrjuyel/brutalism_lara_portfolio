@@ -1,0 +1,163 @@
+export const themes = {
+  'cyber-brutalism': {
+    name: 'Cyber Brutalism',
+    colors: {
+      background: '#000000',
+      foreground: '#ffffff',
+      primary: '#00ff41',
+      'primary-foreground': '#000000',
+      secondary: '#1a1a1a',
+      accent: '#00d4ff',
+      muted: '#111111',
+      'muted-foreground': '#888888',
+      card: '#0a0a0a',
+      'card-foreground': '#ffffff',
+      border: '#333333',
+      destructive: '#ff0040',
+    },
+    typography: {
+      heading: '"Space Grotesk"',
+      body: '"Inter"',
+      mono: '"JetBrains Mono"',
+    },
+    radius: '0px',
+    borderWidth: '2px',
+    shadows: 'none',
+    animations: {
+      glitch: true,
+      scanlines: true,
+      noise: true,
+    },
+  },
+  'mono-brutal': {
+    name: 'Mono Brutal',
+    colors: {
+      background: '#ffffff',
+      foreground: '#000000',
+      primary: '#000000',
+      'primary-foreground': '#ffffff',
+      secondary: '#f5f5f5',
+      accent: '#000000',
+      muted: '#fafafa',
+      'muted-foreground': '#666666',
+      card: '#ffffff',
+      'card-foreground': '#000000',
+      border: '#000000',
+      destructive: '#ff0000',
+    },
+    typography: {
+      heading: '"Syne"',
+      body: '"Inter"',
+      mono: '"Space Mono"',
+    },
+    radius: '0px',
+    borderWidth: '3px',
+    shadows: '4px 4px 0px #000000',
+    animations: {
+      glitch: false,
+      scanlines: false,
+      noise: false,
+    },
+  },
+  'digital-terminal': {
+    name: 'Digital Terminal',
+    colors: {
+      background: '#0a0e14',
+      foreground: '#b3b1ad',
+      primary: '#39bae6',
+      'primary-foreground': '#0a0e14',
+      secondary: '#1a1f29',
+      accent: '#59c2ff',
+      muted: '#0d1117',
+      'muted-foreground': '#565b66',
+      card: '#0d1117',
+      'card-foreground': '#b3b1ad',
+      border: '#1a1f29',
+      destructive: '#ff3333',
+    },
+    typography: {
+      heading: '"JetBrains Mono"',
+      body: '"JetBrains Mono"',
+      mono: '"JetBrains Mono"',
+    },
+    radius: '2px',
+    borderWidth: '1px',
+    shadows: 'none',
+    animations: {
+      glitch: false,
+      scanlines: true,
+      noise: false,
+    },
+  },
+  'acid-future': {
+    name: 'Acid Future',
+    colors: {
+      background: '#f0ede6',
+      foreground: '#1a1a1a',
+      primary: '#c8ff00',
+      'primary-foreground': '#000000',
+      secondary: '#e8e5de',
+      accent: '#ff6b00',
+      muted: '#e8e5de',
+      'muted-foreground': '#666666',
+      card: '#ffffff',
+      'card-foreground': '#1a1a1a',
+      border: '#1a1a1a',
+      destructive: '#ff0000',
+    },
+    typography: {
+      heading: '"Syne"',
+      body: '"Inter"',
+      mono: '"Space Mono"',
+    },
+    radius: '0px',
+    borderWidth: '2px',
+    shadows: '6px 6px 0px #1a1a1a',
+    animations: {
+      glitch: true,
+      scanlines: false,
+      noise: true,
+    },
+  },
+  'minimal-future': {
+    name: 'Minimal Future',
+    colors: {
+      background: '#09090b',
+      foreground: '#fafafa',
+      primary: '#fafafa',
+      'primary-foreground': '#18181b',
+      secondary: '#27272a',
+      accent: '#a1a1aa',
+      muted: '#27272a',
+      'muted-foreground': '#a1a1aa',
+      card: '#18181b',
+      'card-foreground': '#fafafa',
+      border: '#27272a',
+      destructive: '#ef4444',
+    },
+    typography: {
+      heading: '"Inter"',
+      body: '"Inter"',
+      mono: '"JetBrains Mono"',
+    },
+    radius: '6px',
+    borderWidth: '1px',
+    shadows: 'none',
+    animations: {
+      glitch: false,
+      scanlines: false,
+      noise: false,
+    },
+  },
+};
+
+export const getTheme = (name) => {
+  const key = (name && themes[name]) ? name : 'cyber-brutalism';
+  return { ...themes[key], id: key };
+};
+
+
+export const themeList = Object.keys(themes).map((key) => ({
+  value: key,
+  label: themes[key].name,
+}));

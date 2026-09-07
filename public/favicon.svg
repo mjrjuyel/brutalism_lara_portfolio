@@ -1,0 +1,25 @@
+<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="primary-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00ff41" />
+      <stop offset="100%" stop-color="#00d4ff" />
+    </linearGradient>
+  </defs>
+  <!-- Background Disc -->
+  <rect width="100" height="100" rx="20" fill="#090d12"/>
+  
+  <!-- Outer Hexagon -->
+  <polygon points="50,10 88,30 88,70 50,90 12,70 12,30" stroke="#00ff41" stroke-width="3" stroke-opacity="0.5"/>
+  <polygon points="50,16 82,33 82,67 50,84 18,67 18,33" stroke="url(#primary-grad)" stroke-width="1.5" stroke-dasharray="5 3"/>
+
+  <!-- 'M' -->
+  <path d="M 26,68 L 26,34 L 38,48 L 48,36 L 48,58" stroke="#ffffff" stroke-width="5" stroke-linecap="square" stroke-linejoin="miter"/>
+  <!-- 'J' -->
+  <path d="M 52,48 L 52,64 Q 52,72 43,72 L 36,72" stroke="url(#primary-grad)" stroke-width="4.5" stroke-linecap="round"/>
+  <!-- 'R' -->
+  <path d="M 54,34 L 71,34 Q 78,34 78,44 Q 78,53 70,53 L 54,53 M 66,53 L 76,69" stroke="#ffffff" stroke-width="5" stroke-linecap="square" stroke-linejoin="miter"/>
+
+  <!-- Tech Dots -->
+  <circle cx="50" cy="10" r="2.5" fill="#00ff41" />
+  <circle cx="50" cy="90" r="2.5" fill="#00d4ff" />
+</svg>
