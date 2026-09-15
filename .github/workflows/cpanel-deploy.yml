@@ -1,0 +1,76 @@
+name: Deploy to cPanel
+
+on:
+  push:
+    branches:
+      - main  # Change to 'master' if your default branch is master
+
+jobs:
+  build-and-deploy:
+    name: Build & Deploy to cPanel
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🚚 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: ⚙️ Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: mbstring, xml, ctype, iconv, intl, pdo_mysql, bcmath
+          coverage: none
+
+      - name: 📦 Install Composer Dependencies
+        run: composer install --no-dev --prefer-dist --optimize-autoloader --no-progress
+
+      - name: ⚡ Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: 📦 Install NPM Dependencies & Build Assets
+        run: |
+          npm ci
+          npm run build
+
+      - name: 📁 Prepare Deployment Directory
+        run: |
+          # Remove files that shouldn't be on the production server
+          rm -rf node_modules
+          rm -rf .git
+          rm -rf .github
+          rm -rf tests
+
+      # -------------------------------------------------------------
+      # OPTION A: Deploy via FTPS / FTP (Recommended for shared cPanel)
+      # Add FTP_SERVER, FTP_USERNAME, FTP_PASSWORD to GitHub Secrets:
+      # Settings -> Secrets and variables -> Actions -> New repository secret
+      # -------------------------------------------------------------
+      - name: 🚀 Sync Files via FTP / FTPS
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: public_html/   # Change to your target folder on cPanel
+          protocol: ftps             # Use 'ftp' if your cPanel host doesn't support FTPS
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            .env*
+
+      # -------------------------------------------------------------
+      # OPTION B: Deploy via SSH / rsync (If SSH is enabled in cPanel)
+      # Uncomment if using SSH instead of FTP:
+      # -------------------------------------------------------------
+      # - name: 🚀 Deploy via SSH / rsync
+      #   uses: easingthemes/ssh-deploy@main
+      #   env:
+      #     SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      #     REMOTE_HOST: ${{ secrets.SSH_HOST }}
+      #     REMOTE_USER: ${{ secrets.SSH_USER }}
+      #     TARGET: "/home/${{ secrets.SSH_USER }}/public_html/"
+      #     EXCLUDE: "/node_modules/, /.git/, /.github/, /tests/"

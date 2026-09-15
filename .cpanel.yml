@@ -1,0 +1,28 @@
+---
+# cPanel Git™ Version Control Deployment File
+# Documentation: https://docs.cpanel.net/knowledge-base/general/guide-to-git-deployment/
+
+deployment:
+  tasks:
+    # 1. Define destination path
+    # Replace 'YOUR_CPANEL_USERNAME' with your actual cPanel username.
+    # If deploying to a subdomain, change 'public_html' to your subdomain folder.
+    - export DEPLOYPATH=/home/YOUR_CPANEL_USERNAME/public_html/
+    
+    # 2. Sync all repository files to the deployment directory
+    - /bin/cp -R * $DEPLOYPATH
+    
+    # 3. Ensure critical directories exist
+    - /bin/mkdir -p $DEPLOYPATH/storage/framework/{sessions,views,cache}
+    - /bin/mkdir -p $DEPLOYPATH/storage/logs
+    - /bin/mkdir -p $DEPLOYPATH/bootstrap/cache
+    
+    # 4. Set appropriate write permissions for Laravel cache and storage
+    - /bin/chmod -R 775 $DEPLOYPATH/storage
+    - /bin/chmod -R 775 $DEPLOYPATH/bootstrap/cache
+    
+    # 5. Run Artisan cache optimization (if PHP CLI is available on your cPanel)
+    # Uncomment the following lines if you have PHP CLI access:
+    # - /usr/local/bin/php $DEPLOYPATH/artisan config:cache
+    # - /usr/local/bin/php $DEPLOYPATH/artisan route:cache
+    # - /usr/local/bin/php $DEPLOYPATH/artisan view:cache

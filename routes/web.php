@@ -22,6 +22,7 @@ use App\Http\Controllers\Dashboard\SiteSettingController;
 use App\Http\Controllers\Dashboard\MediaController;
 use App\Http\Controllers\Dashboard\PreviewController;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 // Public Portfolio
 Route::get('/', [PortfolioController::class, 'index'])->name('portfolio');
@@ -125,3 +126,10 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+// Fallback 404
+Route::fallback(function () {
+    return Inertia::render('Error', ['status' => 404])
+        ->toResponse(request())
+        ->setStatusCode(404);
+});

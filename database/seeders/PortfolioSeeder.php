@@ -40,7 +40,7 @@ class PortfolioSeeder extends Seeder
             'bio' => 'Senior software engineer specializing in scalable backend infrastructure, reactive UI architecture, and modern digital web applications.',
             'location' => 'Dhaka, Bangladesh',
             'phone' => '+880 1700-000000',
-            'website' => 'https://github.com/mjrcoder7',
+            'website' => 'https://github.com/mjrjuyel',
             'availability' => 'available',
             'years_of_experience' => 9,
             'profile_image_type' => 'url',
