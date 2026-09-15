@@ -53,8 +53,10 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: /   # Change to your target folder on cPanel
-          protocol: ftps             # Use 'ftp' if your cPanel host doesn't support FTPS
+          server-dir: ./   # Current root of your FTP account (or 'public_html/')
+          protocol: ftp    # Use 'ftp' to avoid cPanel Pure-FTPd TLS data socket disconnects
+          port: 21
+          timeout: 600000  # 10 minutes timeout
           exclude: |
             **/.git*
             **/.git*/**
